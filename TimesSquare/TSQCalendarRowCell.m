@@ -141,6 +141,11 @@
             [self.notThisMonthButtons[index] setHidden:NO];
         } else {
 
+            if ([self.calendarView.delegate respondsToSelector:@selector(calendarView:shouldMarkDate:)] && [self.calendarView.delegate calendarView:self.calendarView shouldMarkDate:date]) {
+                // mark button
+                [self.dayButtons[index] setTitle:@"." forState:UIControlStateNormal];
+            }
+            
             if ([self.todayDateComponents isEqual:thisDateComponents]) {
                 self.todayButton.hidden = NO;
                 [self.todayButton setTitle:title forState:UIControlStateNormal];

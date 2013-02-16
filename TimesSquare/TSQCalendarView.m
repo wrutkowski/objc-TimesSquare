@@ -178,6 +178,11 @@
     return [NSIndexPath indexPathForRow:(self.pinsHeaderToTop ? 0 : 1) + targetWeek - firstWeek inSection:section];
 }
 
+- (NSDate*)getMidnightDate:(NSDate*)date {
+    NSDateComponents *dateComponents = [self.calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    return [self.calendar dateFromComponents:dateComponents];
+}
+
 #pragma mark UIView
 
 - (void)layoutSubviews;

@@ -31,6 +31,7 @@
 - (void)loadView;
 {
     TSQCalendarView *calendarView = [[TSQCalendarView alloc] init];
+    calendarView.delegate = self;
     calendarView.calendar = self.calendar;
     calendarView.rowCellClass = [TSQTACalendarRowCell class];
     calendarView.firstDate = [NSDate date];
@@ -73,6 +74,19 @@
     
     [tableView setContentOffset:CGPointMake(0.f, atTop ? 10000.f : 0.f) animated:YES];
     atTop = !atTop;
+}
+
+#pragma mark TSQCalendarViewDelegate
+
+- (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date {
+    NSLog(@"Selected date: %@", date);
+    
+    NSLog(@"%@ => %@", [NSDate dateWithTimeIntervalSinceNow:60*60*24*7], [calendarView getMidnightDate:[NSDate dateWithTimeIntervalSinceNow:60*60*24*7]]);
+}
+
+- (BOOL)calendarView:(TSQCalendarView *)calendarView shouldMarkDate:(NSDate *)date {
+    NSLog(@"%@ => %@", date, [calendarView getMidnightDate:[NSDate dateWithTimeIntervalSinceNow:60*60*24*7]]);
+    return [date isEqualToDate:[calendarView getMidnightDate:[NSDate dateWithTimeIntervalSinceNow:60*60*24*7]]] || [date isEqualToDate:[calendarView getMidnightDate:[NSDate dateWithTimeIntervalSinceNow:60*60*24*7*3]]]; // mark one week & 5 weeks from now
 }
 
 @end

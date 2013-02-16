@@ -98,6 +98,13 @@
  */
 @property (nonatomic, strong) Class rowCellClass;
 
+/** Return NSDate with hours, minutes and seconds set to 0
+ 
+ @param date to change.
+ @return date with hours, menutes and seconds set to 0.
+ */
+- (NSDate*)getMidnightDate:(NSDate*)date;
+
 @end
 
 /** The methods in the `TSQCalendarViewDelegate` protocol allow the adopting delegate to either prevent a day from being selected or respond to it.
@@ -124,5 +131,15 @@
  @param date Midnight on the date being selected.
  */
 - (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date;
+
+/** Asks the delegate whether mark a particular date.
+ 
+ This method should be relatively efficient, as it is called repeatedly.
+ 
+ @param calendarView The calendar view that is marking a date.
+ @param date Midnight on the date being marked.
+ @return Whether or not the date is marked.
+ */
+- (BOOL)calendarView:(TSQCalendarView *)calendarView shouldMarkDate:(NSDate *)date;
 
 @end

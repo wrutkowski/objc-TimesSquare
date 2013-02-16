@@ -8,9 +8,13 @@
 //  which Square, Inc. licenses this file to you.
 
 #import <UIKit/UIKit.h>
+#import <TimesSquare/TimesSquare.h>
 
-@interface TSQTAViewController : UIViewController
+@interface TSQTAViewController : UIViewController <TSQCalendarViewDelegate>
 
 @property (nonatomic, strong) NSCalendar *calendar;
+
+- (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date;
+- (BOOL)calendarView:(TSQCalendarView *)calendarView shouldMarkDate:(NSDate *)date;
 
 @end
